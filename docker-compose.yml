@@ -1,0 +1,5 @@
+version: "3"
+services:
+  linux:
+    build: .
+    tty: true
