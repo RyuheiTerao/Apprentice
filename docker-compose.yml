@@ -3,3 +3,5 @@ services:
   linux:
     build: .
     tty: true
+    volumes:
+      - ./password_manager:/code
