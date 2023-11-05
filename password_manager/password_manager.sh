@@ -1,7 +1,11 @@
 #!/bin/bash
 
 echo パスワードマネージャーへようこそ!
+#鍵を作成
+`gpg --yes --passphrase=pass --armor --output key.txt --export USER-NAME >/dev/null`
 
+#暗号解除して元のファイルに戻す（テキストファイル化)
+`gpg --yes --passphrase=pass --decrypt-files password_db.txt.gpg 2>/dev/null`
 
 while :
 do
@@ -49,3 +53,12 @@ do
   fi
 
 done
+
+#ファイルを暗号化
+`gpg --yes --passphrase=pass --recipient USER-NAME --output password_db.txt.gpg --encrypt password_db.txt`
+
+#暗号化していないテキストファイルを削除
+`rm -rf password_db.txt`
+
+#鍵を削除
+`rm -rf key.txt`
